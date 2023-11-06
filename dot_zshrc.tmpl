@@ -146,4 +146,12 @@ export HOMEBREW_NO_GITHUB_API=true
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 {{end}}
 
+{{- if eq .chezmoi.os "linux" -}}
+# fnm
+export PATH="/home/jenc/.local/share/fnm:$PATH"
+eval "`fnm env`"
+
+eval "$(fnm env --use-on-cd)"
+{{end}}
+
 eval $(thefuck --alias)
