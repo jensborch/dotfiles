@@ -148,7 +148,7 @@ export HOMEBREW_NO_GITHUB_API=true
 
 {{- if eq .chezmoi.os "linux" -}}
 # fnm
-export PATH="/home/jenc/.local/share/fnm:$PATH"
+export PATH="$HOME/.local/share/fnm:$PATH"
 eval "`fnm env`"
 
 eval "$(fnm env --use-on-cd)"
