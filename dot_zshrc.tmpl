@@ -116,6 +116,17 @@ export EDITOR=nano
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias copy="rsync -ah --progress2"
+alias 'll=ls -alF'
+
+
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+# WSL-specific aliases
+alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code'
+alias idea='/mnt/c/Program\ Files/IntelliJ\ IDEA\ 2022.1.1/bin/idea64.exe'
+alias note='/mnt/c/Program\ Files/Notepad++/notepad++.exe'
+{{   end }}
+{{ end }}
 
 {{- if eq .chezmoi.os "darwin" -}}
 export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home
