@@ -7,11 +7,6 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
-{{- if eq .chezmoi.os "linux" -}}
-# Snap
-export PATH=/snap/bin:$PATH
-{{end}}
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -121,7 +116,6 @@ export EDITOR=nano
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias copy="rsync -ah --progress2"
-alias dotfiles="chezmoi"
 
 {{- if eq .chezmoi.os "darwin" -}}
 export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home
@@ -159,6 +153,13 @@ export PATH="$HOME/.local/share/fnm:$PATH"
 eval "`fnm env`"
 
 eval "$(fnm env --use-on-cd)"
+
+# Snap
+export PATH=/snap/bin:$PATH
+alias dotfiles="/snap/bin/chezmoi"
+
+{{else}}
+alias dotfiles="chezmoi"
 {{end}}
 
 eval $(thefuck --alias)
