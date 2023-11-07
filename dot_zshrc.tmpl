@@ -80,11 +80,12 @@ ZSH_THEME="agnoster"
 plugins=(
 {{- if eq .chezmoi.os "darwin" -}}
   macos
+  docker
 {{end}}
   gradle
   git
-  docker
   npm
+  npx
 )
 
 source $ZSH/oh-my-zsh.sh
