@@ -161,9 +161,6 @@ export HOMEBREW_NO_GITHUB_API=true
 {{- if eq .chezmoi.os "linux" -}}
 # fnm
 export PATH="$HOME/.local/share/fnm:$PATH"
-eval "`fnm env`"
-
-eval "$(fnm env --use-on-cd)"
 
 # Snap
 export PATH=/snap/bin:$PATH
@@ -172,6 +169,9 @@ alias dotfiles="/snap/bin/chezmoi"
 {{else}}
 alias dotfiles="chezmoi"
 {{end}}
+
+# fnm
+eval "$(fnm env --use-on-cd)"
 
 eval $(thefuck --alias)
 eval "$(direnv hook zsh)"
