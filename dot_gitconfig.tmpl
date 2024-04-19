@@ -1,0 +1,14 @@
+[user]
+        email = jens.borch@gmail.com
+        name = Jens Borch Christiansen
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[includeIf "gitdir:~/**/work/"]
+	path = ~/.gitconfig-work
+
