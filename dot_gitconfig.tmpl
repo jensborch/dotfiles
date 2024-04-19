@@ -17,8 +17,8 @@
 	process = git-lfs filter-process
 	required = true
 
-[includeIf "gitdir:~/**/work/"]
-	path = ~/.gitconfig-work
-
 [alias]
 	prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d
+
+[includeIf "gitdir:~/**/work/"]
+	path = ~/.gitconfig-work
