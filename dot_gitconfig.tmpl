@@ -1,8 +1,16 @@
 [user]
         email = jens.borch@gmail.com
-        name = Jens Borch Christiansen
+	name = Jens Borch Christiansen
+{{- if eq .chezmoi.os "darwin" -}}
+[credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager
+{{end}}
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 [credential]
 	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+{{   end }}
+{{ end }}
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -12,3 +20,5 @@
 [includeIf "gitdir:~/**/work/"]
 	path = ~/.gitconfig-work
 
+[alias]
+	prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d
