@@ -85,7 +85,6 @@ plugins=(
   gradle
   git
   npm
-  direnv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -119,9 +118,6 @@ export EDITOR=nano
 alias copy="rsync -ah --info=progress2"
 alias 'll=ls -alF'
 alias dotfiles="chezmoi"
-
-eval $(thefuck --alias)
-eval "$(direnv hook zsh)"
 
 {{ if eq .chezmoi.os "linux" }}
 {{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
@@ -181,3 +177,6 @@ export PATH=/snap/bin:$PATH
 
 # END Linux
 {{end}}
+
+eval $(thefuck --alias)
+eval "$(direnv hook zsh)"
