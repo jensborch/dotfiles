@@ -1,8 +1,6 @@
 #!/bin/sh
 {{ if eq .chezmoi.os "linux" -}}
-sudo apt install direnv python3-dev python3-pip python3-setuptools
-pip3 install thefuck --user
+sudo apt install direnv
 {{ else if eq .chezmoi.os "darwin" -}}
 brew install direnv
-brew install thefuck
 {{ end -}}
