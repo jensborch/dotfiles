@@ -131,17 +131,16 @@ alias note='/mnt/c/Program\ Files/Notepad++/notepad++.exe'
 
 {{- if eq .chezmoi.os "darwin" -}}
 # START MacOS
-export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home
 export JAVA_11_HOME=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home
-export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/temurin.jdk/Contents/Home
+export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/temurin17.jdk/Contents/Home
+export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/temurin21.jdk/Contents/Home
 
-alias java8="export JAVA_HOME=$JAVA_8_HOME"
 alias java11="export JAVA_HOME=$JAVA_11_HOME"
 alias java17="export JAVA_HOME=$JAVA_17_HOME"
+alias java17="export JAVA_HOME=$JAVA_21_HOME"
 
 # Set default to Java 11
-java11
-export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
+java21
 
 if type brew &>/dev/null
 then
@@ -155,8 +154,6 @@ export PATH=$PATH:$(go env GOPATH)/bin
 # HOMEBREW_GITHUB_API_TOKEN
 export HOMEBREW_NO_GITHUB_API=true
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 # END MacOS
 {{end}}
 
@@ -165,17 +162,17 @@ export HOMEBREW_NO_GITHUB_API=true
 # Setup SDKMAN
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+# Snap
+export PATH=/snap/bin:$PATH
+
+# END Linux
+{{end}}
+
 # fnm
 FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="$HOME/.local/share/fnm:$PATH"
   eval "$(fnm env --use-on-cd)"
 fi
-
-# Snap
-export PATH=/snap/bin:$PATH
-
-# END Linux
-{{end}}
 
 eval "$(direnv hook zsh)"
