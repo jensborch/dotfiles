@@ -120,7 +120,7 @@ alias 'll=ls -alF'
 alias dotfiles="chezmoi"
 
 extlowcase() {
-    find . -name "*.$1" -execdir rename -vf 's/\.'"$1"'$/.'"${(L)1}"'/' {} \;
+    find . -maxdepth 1 -name "*.$1" -execdir rename -vf 's/\.'"$1"'$/.'"${(L)1}"'/' {} \;
 }
 
 {{ if eq .chezmoi.os "linux" }}
