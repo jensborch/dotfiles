@@ -123,6 +123,9 @@ extlowcase() {
     find . -maxdepth 1 -name "*.$1" -execdir rename -vf 's/\.'"$1"'$/.'"${(L)1}"'/' {} \;
 }
 
+# Setup SDKMAN
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 {{ if eq .chezmoi.os "linux" }}
 {{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 # START WSL
@@ -135,17 +138,6 @@ alias note='/mnt/c/Program\ Files/Notepad++/notepad++.exe'
 
 {{- if eq .chezmoi.os "darwin" -}}
 # START MacOS
-export JAVA_11_HOME=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home
-export JAVA_17_HOME=/Library/Java/JavaVirtualMachines/temurin17.jdk/Contents/Home
-export JAVA_21_HOME=/Library/Java/JavaVirtualMachines/temurin21.jdk/Contents/Home
-
-alias java11="export JAVA_HOME=$JAVA_11_HOME"
-alias java17="export JAVA_HOME=$JAVA_17_HOME"
-alias java21="export JAVA_HOME=$JAVA_21_HOME"
-
-# Set default to Java 11
-java21
-
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
@@ -163,8 +155,6 @@ export HOMEBREW_NO_GITHUB_API=true
 
 {{- if eq .chezmoi.os "linux" -}}
 # START Linux
-# Setup SDKMAN
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Snap
 export PATH=/snap/bin:$PATH
