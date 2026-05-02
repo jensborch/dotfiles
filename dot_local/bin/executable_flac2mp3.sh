@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Default directories
-FLAC_DIR="${1:-/tank/media/Flac}"
-MP3_DIR="${2:-/tank/media/Mp3}"
+FLAC_DIR="${1:-/tank/media/Music/Flac}"
+MP3_DIR="${2:-/tank/media/Music/Mp3}"
 
 # Step 1: Add ReplayGain to new FLAC folders (albums)
 echo "Adding ReplayGain to new FLAC folders..."
