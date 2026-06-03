@@ -1,4 +1,4 @@
-# Sonar / GitHub conventions
+# Sonar conventions
 
 - **Default Sonar project key = git repo name** (e.g. repo `Nykredit/ui-fix` → key `ui-fix`).
   Use this when `sonar-project.properties`, `pom.xml`, etc. do not declare `sonar.projectKey`.
