@@ -1,6 +1,7 @@
 ---
 applyTo: "**"
 ---
+
 # Prefer the GitHub MCP server for GitHub operations
 
 When the task involves interacting with GitHub (pull requests, issues, reviews,
@@ -22,7 +23,7 @@ deferred — if a needed tool is not visible, load it first with `tool_search`
 
 Local `git` (status, add, commit, checkout, branch, diff, log, push to the
 already-configured remote) remains the normal choice for local repo work —
-this rule is about *remote GitHub interactions*, not local version control.
+this rule is about _remote GitHub interactions_, not local version control.
 
 ## Common task → tool map
 
@@ -58,16 +59,21 @@ correspondingly named `mcp_io_github_git_*` tool.
    review comments / unresolved threads. Do not guess what the reviewer asked
    for — read the actual comments.
 3. Check out the PR branch locally with `git` (local git is fine here).
-4. Make the code changes in the workspace using normal file-editing tools.
-5. Run the project's tests / lint before pushing.
-6. Commit and push with local `git` to the PR branch (normal flow), OR if no
-   local checkout exists, use `mcp_io_github_git_push_files`.
-7. Reply to each addressed review comment with
-   `mcp_io_github_git_add_reply_to_pull_request_comment`, referencing the
-   commit SHA that addresses it. Do not mark threads resolved unless the user
-   asks.
-8. Do not merge, force-push, or close the PR without explicit user
-   confirmation.
+4. Make the required code changes based on the review comments.
+5. Stage and commit with `git add` / `git commit`.
+6. Push to the remote with `git push` (uses the already-configured remote — no MCP needed for this step).
+7. Verify the push landed by re-reading the PR with `mcp_io_github_git_pull_request_read`.
+8. If the reviewer asked for a reply or resolution, post it with `mcp_io_github_git_add_reply_to_pull_request_comment` or `mcp_io_github_git_add_issue_comment`.
+9. Make the code changes in the workspace using normal file-editing tools.
+10. Run the project's tests / lint before pushing.
+11. Commit and push with local `git` to the PR branch (normal flow), OR if no
+    local checkout exists, use `mcp_io_github_git_push_files`.
+12. Reply to each addressed review comment with
+    `mcp_io_github_git_add_reply_to_pull_request_comment`, referencing the
+    commit SHA that addresses it. Do not mark threads resolved unless the user
+    asks.
+13. Do not merge, force-push, or close the PR without explicit user
+    confirmation.
 
 ## Anti-patterns to avoid
 
